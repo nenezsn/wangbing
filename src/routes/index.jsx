@@ -2,8 +2,7 @@
  * 目前都是练习用的功能
  */
 import React from 'react'
-import {Button,Input} from 'antd'
-import styles from './index.less'
+import {Button} from 'antd'
 
 export default class name extends React.Component {
   reqiureEnsure = () => {
@@ -45,20 +44,10 @@ export default class name extends React.Component {
     document.body.appendChild(form)
     form.submit()
   }
-  openAll = () => {
-    let a = function(city) {
-      return window.fetch('/weatherApi?city=' + city).then(res => res.json())
-    }
 
-    Promise.all(['唐山','北京','上海'].map(item=>a(item))).then(data => {
-      console.log('data', data)
-    }).catch(err=>{
-      console.log('err',err)
-    })
-  }
   render() {
     return (
-      <div className={styles.box}>
+      <div>
         <Button onClick={this.reqiureEnsure}>按需加载脚本</Button>
 
         <Button onClick={this.markError}>记录错误日志</Button>
@@ -78,7 +67,6 @@ export default class name extends React.Component {
         <Button onClick={()=>{document.getElementById('login').submit()}}>登录</Button>
 
         <Button onClick={this.to_logout}>登出操作</Button>
-        <Button onClick={this.openAll}>测试promiseAll</Button>
 
       </div>
     )

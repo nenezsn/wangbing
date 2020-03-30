@@ -6,8 +6,6 @@ const navList = [
     { path: '/Upload', title: 'Upload' },
     { path: '/Render', title: 'RenderProps' },
     { path: '/Test', title: 'Test' },
-    { path: '/Login', title: 'Login' },
-    { path: '/Animate', title: 'Animate' },
     { path: '/OldLife', title: 'OldLife' },
     { path: '/SocketDemo', title: 'Socket' },
     { path: '/Code', title: 'Code' },

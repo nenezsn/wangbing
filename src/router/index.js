@@ -13,10 +13,8 @@ const RouterConfig = function () {
         {/* <Route path="/" exact component={require('@routes/pdf')} /> */}
           <Route path="/" exact component={require('@routes/index')} />
           <Route path="/Upload" exact component={require('@routes/upload')} />
-          <Route path="/Render" exact component={require('@routes/render/renderProps')} />
+          <Route path="/Render" exact component={require('@routes/renderProps')} />
           <Route path="/Test" exact component={require('@routes/test')} />
-          <Route path="/Login" exact component={require('@routes/login')} />
-          <Route path="/Animate" exact component={require('@routes/animate')} />
           <Route path="/OldLife" exact component={require('@routes/oldLIfe')} />
           <Route path="/SocketDemo" exact component={require('@routes/socketDemo')} />
           <Route path="/Redux" exact component={require('@routes/reduxDemo')} />

@@ -8,9 +8,7 @@ const namespace = 'user'
 export function user(state = userInitState, action) {
     switch (action.type) {
         case namespace+'/fixUserInfo':
-            return {
-                ...state, ...action.payload
-            }
+            return Object.assign({},state,action.payload)
             break
         default:
             return state

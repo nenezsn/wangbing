@@ -8,6 +8,7 @@ import { Provider } from 'react-redux'
 import { persistStore, persistReducer } from 'redux-persist'
 import storageSession from 'redux-persist/lib/storage/session'
 import { PersistGate } from 'redux-persist/integration/react'
+import Thunk from 'redux-thunk'
 
 const rootRersistConfig = {
     key: 'root',
@@ -15,12 +16,15 @@ const rootRersistConfig = {
     // whitelist:['user']
 }
 const persistedReducer = persistReducer(rootRersistConfig, combineReducers(reducer))
-let store = createStore(persistedReducer, applyMiddleware(logger(true)))
+let store = createStore(persistedReducer, applyMiddleware(Thunk,logger(true)))
 let persistor = persistStore(store)
 // const store = createStore(combineReducers(reducer), '',applyMiddleware(logger(true)))
 
 ReactDom.render(<Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
+    <PersistGate 
+    loading={null} 
+    persistor={persistor}
+    >
         {RouterConfig()}
     </PersistGate>
 </Provider>, document.getElementById('root'))

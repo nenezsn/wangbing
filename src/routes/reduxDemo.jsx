@@ -1,3 +1,6 @@
+/**
+ * @desc redux 功能测试
+ */
 import React from 'react';
 import { connect } from 'react-redux'
 import { Button,  Divider } from 'antd'
@@ -5,6 +8,17 @@ import { Button,  Divider } from 'antd'
 class Son extends React.Component {
     componentDidUpdate(){
         console.log('son componentDidUpdate')
+    }
+
+    addAge=()=>{
+        this.props.dispatch((dispatch,b)=>{
+            dispatch({
+                type:'user/fixUserInfo',
+                payload:{
+                    age:88
+                }
+            })
+        })
     }
     render() {
         const { name,age,sex,school } =this.props.user
@@ -14,6 +28,7 @@ class Son extends React.Component {
             <Button i onClick={this.props.fixUserInfo}>获取user state</Button>
             <input id='user' />
             <p>{name}-{age}-{sex}-{school}-{company}</p>
+            <Button i onClick={this.addAge}>AddAge</Button>
         </div>
     }
 }
@@ -31,7 +46,8 @@ const mapDispatchToProps = function(dispatch){
                     name: document.getElementById('user').value
                 }
             })
-        }
+        },
+        dispatch
     }
 }
 

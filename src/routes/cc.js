@@ -90,10 +90,10 @@ class CC extends React.Component {
         //     })
         //    let list =  this.filterRepeatItem(arr,'viewerName')
         // })
-        this.getLiveing()
+        // this.getLiveing()
     }   
     render() {
-        return <div>1111</div>
+        return <div></div>
     }
 }
 export default CC
