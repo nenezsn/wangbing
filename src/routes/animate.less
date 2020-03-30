@@ -1,0 +1,44 @@
+.box {
+    width: 500px;
+    height: 500px;
+    border: 2px solid black;
+    margin: 40px auto;
+    border-radius: 2px;
+    position: relative;
+    div {
+        width: 50px;
+        height: 50px;
+        background: red;
+        transform-Origin: left top;
+        transition: transform 2s;
+        position: absolute;
+        left: 0;
+    }
+    .item1 {
+        top: 0;
+        box-sizing: content-box;
+    }
+    .item2 {
+        top: 60px; // border-radius: 50%;
+        animation-name: myfirst;
+        animation-duration: 2s;
+        animation-timing-function: ease;
+        animation-fill-mode: forwards;
+    }
+    .item3 {
+        top: 120px;
+        transform: scale(.1);
+        &:hover {
+            transform:scale(.9);
+        }
+    }
+}
+
+@keyframes myfirst {
+    from {
+        transform: scale(.1);
+    }
+    to {
+        transform: scale(.9);
+    }
+}

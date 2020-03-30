@@ -1,0 +1,120 @@
+.container{
+    padding-top: 48px;
+    position: relative;
+}
+.menu{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+.account_box{
+    width: 400px;
+    margin: 40px auto;
+    cursor: pointer;
+    text-align: center;
+   
+    p{
+        line-height: 24px;
+        &:hover{
+            background: #cfcfcf;
+        }
+    }
+}
+.address_box{
+    width: 400px;
+    margin: 20px auto;
+    text-align: center;
+    cursor: pointer;
+    a{
+        display: block;
+        &:hover{
+            background: #cfcfcf;
+        }
+    }
+}
+.todo_box{
+    width: 600px;
+    margin: 20px auto;
+    cursor: pointer;
+    :global{
+        .ant-statistic{
+            display: inline-block; 
+            margin-right: 30px;
+        }
+    }
+    input{
+        width: 400px;
+        margin: 30px 100px;
+        height: 40px;
+        font-size: 14px;
+    }
+    .item{
+        overflow: hidden;
+        margin: 10px 0;
+        font-size: 18px;
+        &:hover{
+            background: #cfcfcf;
+        }
+        .left{
+            float: left;
+            max-width: 400px;
+            i{
+                background: #efefef;
+                font-size: 12px;
+            }
+        }
+        .right{
+            float: right;
+            i{
+                font-size: 16px;
+                margin-right: 8px;
+                cursor: pointer;
+            }
+            i:hover{
+                color:#3cdd61;
+            }
+            .acitve{
+                color:#3cdd61;
+            }
+        }
+    }
+    button{
+        margin: 20px auto;
+    }
+}
+.diary_box{
+    width: 600px;
+    margin: 20px auto;
+    input{
+        width: 400px;
+        margin: 30px 100px;
+        height: 40px;
+        font-size: 14px;
+    }
+    p{
+        line-height: 24px;
+        font-size: 14px;
+    }
+    .time{
+        background: #efefef;
+        font-size: 12px;
+    }
+    i{
+        float: right;
+        cursor: pointer;
+        &:hover{
+            color:#3cdd61;
+        }
+    }
+}
+.tool_box{
+    width: 800px;
+    margin: 20px auto;
+}
+:global{
+    .ant-collapse-header{
+        font-weight: 600;
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "presets": [
+        "env",
+        "react",
+        "stage-1"
+    ],
+    "plugins": [
+        ["transform-remove-console", { "exclude": [ "error","log"] }],
+        // "dva-hmr",
+        // Babel6 不再导出默认值module.exports- 杀死CommonJS默认导出行为。需要借助add-module-exports
+        "add-module-exports",
+        // 我竟然把style的ture加了双引号，导致一直不生效，气死个人了。
+        [
+            "import",
+            { "libraryName": "antd", "libraryDirectory": "es", "style": true }
+        ],
+        [
+            "transform-runtime",
+            {
+                "helpers": false,
+                "polyfill": false,
+                "regenerator": true,
+                "moduleName": "babel-runtime"
+            }
+        ]
+    ]
+}   
