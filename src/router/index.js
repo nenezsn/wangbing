@@ -21,7 +21,6 @@ const RouterConfig = function () {
           <Route path="/Code" exact component={require('@routes/code')} />
           <Route path="/Cc" exact component={require('@routes/cc')} />
           <Route path="/Video" exact component={require('@routes/video')} />
-          <Route path="/Drag" exact component={require('@routes/drag')} />
         </App>
       </LocaleProvider>
     </Router>

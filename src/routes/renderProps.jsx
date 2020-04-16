@@ -1,7 +1,8 @@
 import React from 'react'
 import { Button, Input, Divider } from 'antd'
 import Confirm from '../components/confirm'
-
+import Context from '../context'
+import Child from '../components/child'
 
 class Index extends React.Component {
     input = React.createRef() 
@@ -44,8 +45,10 @@ class Index extends React.Component {
             <Divider>reactDom.render</Divider>
             <Button onClick={this.react_render}>测试react.render</Button>
             
-            <Divider></Divider>
-
+            <Divider>Context</Divider>
+                <Context.Provider value={{age:23}}>
+                        <Child/>
+                </Context.Provider>
         </div>
     }
 }
