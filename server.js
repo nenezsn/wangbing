@@ -37,8 +37,16 @@ app.use(compression())//gzip压缩尽量放在其他中间件前面
 app.use(bodyParser.json()) //解析 Content-type : appliaction/json 就是json对象
 app.use(bodyParser.urlencoded({ extended: true })) //解析 Content-type : application/x-www-form-urlencoded 是一个通过&拼接起来的字符串
 
-//对http传入的cookie进行解析后赋值给req.cookies
-app.use(cookieParser())
+//对http传入的cookie进行解析后赋值给req.cookies(参数是signed密钥)
+app.use(cookieParser('aa12312312312a'))
+// 对cookie进行签名
+// app.get('/set',(req,res,next)=>{
+//     res.cookie('name','wb',{signed:true})
+//     res.send('200')
+// })
+// app.get('/get',(req,res,next)=>{
+//     res.send(req.signedCookies.name)
+// })
 
 //打印日志
 app.use(logger('dev'))
@@ -77,16 +85,6 @@ app.get('/template', (req, res, next) => {
     })
 
 })
-const hellohtml = require('./serverPage/component.jsx')
-app.get('/woqu',(req,res,next)=>{
-    res.send(`<html>
-    <body>
-    <div id='root'>${hellohtml}</div>
-    <script src='/index.js'></script>
-    </body>
-    </html>`)
-})
-
 
 //cheerio 操作dom
 app.get('/cheerio', (req, res, next) => {
