@@ -20,9 +20,6 @@ const debug = require('./applyMiddleware/debug.js') //cc视频中间键
 const util = require('./util')
 const https = require('https')
 // const pbu_wx_sdk = require('pbu-wx-sdk') //wx sdk中间键
-require('babel-core/register')({
-    presets:['react','es2015']
-})
 
 const app = express()
 //将文件等信息绑定在red.body上
@@ -109,7 +106,6 @@ app.get('/cheerio', (req, res, next) => {
 })
 
 //读取静态资源
-// app.use(express.static('serverDist')) ssr使用
 app.use(express.static('dist'))
 
 //用于上传使用(single参数为上传文件空间的name属性)

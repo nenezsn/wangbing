@@ -67,6 +67,38 @@ export default class name extends React.Component {
             let data = await delay(arr[i])
         }
     }
+    // 类似vue的数据拦截
+    test_observer = () => {
+        function observer(data) {
+            if (typeof data != 'object') {
+                return data
+            }
+            Object.keys(data).forEach(item => {
+                defineReactive(data, item, data[item])
+            })
+        }
+        function defineReactive(obj, key, value) {
+            observer(obj)
+            Object.defineProperty(obj, key, {
+                get: function () {
+                    console.log('获取' + key)
+                    return value
+                },
+                set: function (newval) {
+                    console.log('设置' + key)
+                    value = newval
+                    return value
+                }
+            })
+        }
+        const obj = {
+            name: '王冰',
+            age: 23
+        }
+        observer(obj)
+        obj.name
+        obj.name = '王长'
+    }
     render() {
         return (
             <div className={styles.box}>
@@ -74,6 +106,7 @@ export default class name extends React.Component {
                 <Button onClick={this.generator}>使用co执行generator函数</Button>
                 <Button onClick={this.test_co}>测试co</Button>
                 <Button onClick={this.test_async}>测试async</Button>
+                <Button onClick={this.test_observer}>数据拦截简单实现</Button>
             </div>
         )
     }
