@@ -199,6 +199,12 @@ app.get('/responce', (req, res, next) => {
         sex: '男'
     })
 })
+app.get('/deleteCache',(req,res,next)=>{
+    // 用于清除node reuqire的缓存
+    delete require.cache[require.resolve('./tt.js')];
+    const a =require('./tt.js')
+    res.send(a)
+})
 
 //在任何都没有匹配到的情况下 就发送index.html
 app.get('*', (req, res, next) => {
