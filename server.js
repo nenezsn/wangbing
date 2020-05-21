@@ -20,13 +20,18 @@ const debug = require('./applyMiddleware/debug.js') //cc视频中间键
 const util = require('./util')
 const https = require('https')
 // const pbu_wx_sdk = require('pbu-wx-sdk') //wx sdk中间键
+var router = express.Router()
 
 const app = express()
 //将文件等信息绑定在red.body上
 var upload = multer({
     dest: 'upload/'
 })
-
+app.use(router)
+router.get('/user/:id', function (req, res, next) {
+    console.log('although this matches')
+    res.send(req.params.id)
+})
 app.set('port', process.env.PORT || 6080)
 app.set('trust proxy', true)
 
@@ -57,15 +62,15 @@ app.use(getCc.getCc)
 app.use(debug)
 
 //使用express-http-proxy代理所有的post请求 只是转发请求
-app.use('/demo', (req,resp,next)=>{
-    https.get('https://www.baidu.com',function(res){
-            const buffer = []
-    res.on('data',d=>{
-        buffer.push(d)
-    })
-    res.on('end',()=>{
-        resp.end(Buffer.concat(buffer))
-    })
+app.use('/demo', (req, resp, next) => {
+    https.get('https://www.baidu.com', function (res) {
+        const buffer = []
+        res.on('data', d => {
+            buffer.push(d)
+        })
+        res.on('end', () => {
+            resp.end(Buffer.concat(buffer))
+        })
     })
     return
 })
@@ -199,12 +204,14 @@ app.get('/responce', (req, res, next) => {
         sex: '男'
     })
 })
-app.get('/deleteCache',(req,res,next)=>{
+app.get('/deleteCache', (req, res, next) => {
     // 用于清除node reuqire的缓存
     delete require.cache[require.resolve('./tt.js')];
-    const a =require('./tt.js')
+    const a = require('./tt.js')
     res.send(a)
 })
+
+
 
 //在任何都没有匹配到的情况下 就发送index.html
 app.get('*', (req, res, next) => {
