@@ -20,7 +20,8 @@ export default class Test extends React.Component {
         initDone: false,
         count: 1,
         age: '23',
-        tp_key:1
+        tp_key:1,
+        num:0
     }
     copy = () => {
         var wrapper = document.getElementById("wrapper");
@@ -37,6 +38,20 @@ export default class Test extends React.Component {
     }
     componentDidMount() {
         this.loadLocales();
+        this.addEvent()
+    }
+    addEvent=()=>{
+        document.getElementById('state').addEventListener('click', () => {
+            this.setState({
+                num: this.state.num + 1
+            })
+            console.log(this.state.num)
+            this.setState({
+                num: this.state.num + 1
+            })
+            console.log(this.state.num)
+        })
+        console.warn('在非react事件系统中，setState才会是同步的，例如addEventListener和setTimeout')
     }
 
     loadLocales = () => {
@@ -139,6 +154,7 @@ export default class Test extends React.Component {
                 <a href='/oss' download="w3logo.pdf">下载</a>
                 <Button onClick={this.refresh}>刷新key</Button>
                 <p id='t_p' key={this.state.tp_key}>测试</p>
+                <button id='state'>测试setState</button>
             </div>
         </div>
     }
