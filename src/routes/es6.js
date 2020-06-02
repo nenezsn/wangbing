@@ -78,7 +78,7 @@ export default class name extends React.Component {
             })
         }
         function defineReactive(obj, key, value) {
-            observer(obj)
+            observer(value)
             Object.defineProperty(obj, key, {
                 get: function () {
                     console.log('获取' + key)
