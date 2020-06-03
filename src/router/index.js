@@ -20,7 +20,6 @@ const RouterConfig = function () {
           <Route path="/Redux" exact component={require('@routes/reduxDemo')} />
           <Route path="/Code" exact component={require('@routes/code')} />
           <Route path="/Cc" exact component={require('@routes/cc')} />
-          <Route path="/Video" exact component={require('@routes/video')} />
         </App>
       </LocaleProvider>
     </Router>

@@ -192,8 +192,14 @@ app.get('/route', (req, res, next) => {
         }
     }
 )
+// jsonp 实现方式
+app.get('/getJsonp',(req,res,next)=>{
+    const callback = req.query.callback
+    console.log('222',req.query)
+    res.send(callback+'("哈哈")')
+})
 
-//模仿api接口
+//配置cors  模仿api接口
 app.get('/responce', (req, res, next) => {
     //添加头部信息
     res.set({

@@ -20,8 +20,8 @@ export default class Test extends React.Component {
         initDone: false,
         count: 1,
         age: '23',
-        tp_key:1,
-        num:0
+        tp_key: 1,
+        num: 0
     }
     copy = () => {
         var wrapper = document.getElementById("wrapper");
@@ -40,7 +40,7 @@ export default class Test extends React.Component {
         this.loadLocales();
         this.addEvent()
     }
-    addEvent=()=>{
+    addEvent = () => {
         document.getElementById('state').addEventListener('click', () => {
             this.setState({
                 num: this.state.num + 1
@@ -92,14 +92,19 @@ export default class Test extends React.Component {
         })
     }
     postMessage = () => {
-        const otherWindow = window.open('http://localhost:8000')
+        const frame = document.getElementById('frame')
+        const otherWindow = frame.contentWindow
         setTimeout(function () {
             otherWindow.postMessage('我发消息了', 'http://localhost:8000')
         }, 3000)
-        // window.addEventListener("message", receiveMessage, false) ;
-        //     function receiveMessage(event) {
-        //         console.log(event.data);
-        //     }
+        window.addEventListener("message", receiveMessage, false);
+        // event.origin 来源
+        // event.source.postMessage('value',event.origin) 实现双向通信
+        // event.data 数据
+        // webpack自身也会触发postMessage  注意过滤信息
+        function receiveMessage(event) {
+            console.log(event.data);
+        }
     }
 
     test_preState = () => {
@@ -115,13 +120,13 @@ export default class Test extends React.Component {
         window.print();
     }
 
-    refresh=()=>{
-        document.getElementById('t_p').innerHTML='缓存'
-        setTimeout(()=>{
+    refresh = () => {
+        document.getElementById('t_p').innerHTML = '缓存'
+        setTimeout(() => {
             this.setState({
-                tp_key:this.state.tp_key+1
+                tp_key: this.state.tp_key + 1
             })
-        },3000)
+        }, 3000)
     }
 
     render() {
@@ -148,6 +153,11 @@ export default class Test extends React.Component {
                 <Button onClick={() => { window.location.href = '/download_resource?' }}>下载文件</Button>
                 <Button onClick={this.tobaidu}>打开新页被拦截问题</Button>
                 <Button onClick={this.postMessage}>postMessage</Button>
+                {/* <iframe
+                src='http://localhost:8000'
+                id = 'frame'
+                >
+                </iframe> */}
                 <Button onClick={this.test_preState}>测试preState{this.state.count}</Button>
 
                 <div onClick={this.doPrint}>点击打印</div>
