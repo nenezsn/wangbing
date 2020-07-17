@@ -7,13 +7,15 @@ import $ from 'jquery'
 import querystring from 'querystring';
 import moment from 'moment'
 import { setTimeout } from 'timers';
-
+import Copy from '../components/Copy'
 
 // locale data
 const locales = {
     "en-US": require('./locales/en-US.js'),
     "zh-CN": require('./locales/zh-CN.js'),
 };
+
+
 
 export default class Test extends React.Component {
     state = {
@@ -24,10 +26,7 @@ export default class Test extends React.Component {
         num: 0
     }
     copy = () => {
-        var wrapper = document.getElementById("wrapper");
-        wrapper.select();
-        document.execCommand("Copy");
-        alert("复制成功！" + wrapper.value);
+        this.refs.copy.onHandleCopy()
     }
     thqs = () => {
         //    const dom = document.getElementById('getCcVideoInfo')
@@ -134,8 +133,8 @@ export default class Test extends React.Component {
             <div >
                 <Divider>粘贴复制功能</Divider>
                 {/* 原生js实现粘贴复制，记住多行文本框的支持 */}
-                <textarea id="wrapper">dasdas</textarea>
-                <span id="btn" onClick={this.copy}>复制</span>
+                <Copy ref='copy' text='哈哈'/>
+                <span onClick={this.copy}>复制</span>
                 <Divider>获取数据</Divider>
                 <Button onClick={this.thqs}>获取视频信息</Button>
                 <form action="/getCcVideoInfo" method="POST" id='getCcVideoInfo' type='hidden'></form>

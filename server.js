@@ -27,6 +27,7 @@ const app = express()
 var upload = multer({
     dest: 'upload/'
 })
+var updateHtml = multer({dest:'dist/'})
 app.use(router)
 router.get('/user/:id', function (req, res, next) {
     console.log('although this matches')
@@ -125,6 +126,23 @@ app.post('/upload', upload.single('img'), (req, res, next) => {
             res.send({
                 status: '上传成功',
                 url: 'http://localhost:6080/downloadFile/' + req.file.originalname
+            })
+        })
+    })
+})
+
+app.post('/updateHtml',updateHtml.single('html'),(req,res,next)=>{
+    fs.readFile('./dist/' + req.file.filename, (err, data) => {
+        fs.writeFile('./dist/' + req.file.originalname, data, err => {
+            if (err) throw err
+            fs.unlink('./dist/' + req.file.filename, err => {
+                console.log('删除成功')
+            })
+            res.set({
+                'Access-Control-Allow-Origin': '*'
+            })
+            res.send({
+                status: '上传成功',
             })
         })
     })
