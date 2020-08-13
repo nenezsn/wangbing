@@ -1,22 +1,10 @@
 /**
  * 临时的websocket服务器
  */
-const express = require('express')
-const app = express()
-const bodyParser = require('body-parser')
 
-app.set('port', process.env.PORT || 6080)
-app.set('trust proxy', true)
-
-
-//主要用来解析前端传过来的数据(分装在req.body)
-app.use(bodyParser.json()) //解析 Content-type : appliaction/json 就是json对象
-app.use(bodyParser.urlencoded({ extended: true })) //解析 Content-type : application/x-www-form-urlencoded 是一个通过&拼接起来的字符串
-
-
-// app.get('/socket_connect',(req,res)=>{
 var ws = require("nodejs-websocket");
 var server = ws.createServer(function (conn) {
+    let count = 0
     conn.on("text", function (str) {
         server.connections.forEach(function (conn) {
             if (str == 'name') {
@@ -32,6 +20,12 @@ var server = ws.createServer(function (conn) {
             }
         })
     })
+    server.connections.forEach(function (conn) {
+        setInterval(() => {
+            count += 1;
+            conn.send(`这是第${count}条信息<br/>`);
+        }, 1000);
+    })
     conn.on("close", function (code, reason) {
         console.log("关闭连接")
     });
@@ -39,13 +33,6 @@ var server = ws.createServer(function (conn) {
         console.log("异常关闭")
     });
 
-}).listen(8001)
-
-
-app.get('*', (req, res, next) => {
-    res.send('404')
-})
-
-app.listen(app.get('port'), function () {
-    console.log('可访问端口:' + 'http://localhost:' + app.get('port'))
+}).listen(8001,function(){
+    console.log('启动了')
 })

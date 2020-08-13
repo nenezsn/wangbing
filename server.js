@@ -130,23 +130,31 @@ app.post('/upload', upload.single('img'), (req, res, next) => {
         })
     })
 })
-
 app.post('/updateHtml',updateHtml.single('html'),(req,res,next)=>{
-    fs.readFile('./dist/' + req.file.filename, (err, data) => {
-        fs.writeFile('./dist/' + req.file.originalname, data, err => {
-            if (err) throw err
-            fs.unlink('./dist/' + req.file.filename, err => {
-                console.log('删除成功')
-            })
-            res.set({
-                'Access-Control-Allow-Origin': '*'
-            })
-            res.send({
-                status: '上传成功',
-            })
-        })
+    fs.rename('./dist/' + req.file.filename,'./dist/' + req.file.originalname,function(err){
+      if(err){
+        res.send({msg:'上传失败'})
+      }else{
+        res.send({msg:'上传成功'})
+      }
     })
-})
+  })
+// app.post('/updateHtml',updateHtml.single('html'),(req,res,next)=>{
+//     fs.readFile('./dist/' + req.file.filename, (err, data) => {
+//         fs.writeFile('./dist/' + req.file.originalname, data, err => {
+//             if (err) throw err
+//             fs.unlink('./dist/' + req.file.filename, err => {
+//                 console.log('删除成功')
+//             })
+//             res.set({
+//                 'Access-Control-Allow-Origin': '*'
+//             })
+//             res.send({
+//                 status: '上传成功',
+//             })
+//         })
+//     })
+// })
 
 //用与文件批量上传
 app.post('/mult_upload', upload.array('img', 20), (req, res, next) => {
