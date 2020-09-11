@@ -20,6 +20,8 @@ const RouterConfig = function () {
           <Route path="/Redux" exact component={require('@routes/reduxDemo')} />
           <Route path="/Code" exact component={require('@routes/code')} />
           <Route path="/Cc" exact component={require('@routes/cc')} />
+          <Route path="/table" exact component={require('@routes/table')} />
+          <Route path="/html" exact component={require('@routes/htmltoCanvas')} />
         </App>
       </LocaleProvider>
     </Router>
