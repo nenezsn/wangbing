@@ -67,6 +67,19 @@ export default class name extends React.Component {
             imgUrl:e.url
         })
     }
+    submit=()=>{
+        let fd = new FormData()
+        fd.append('key', 'wangbing')
+        window.fetch()
+        $.ajax({
+            url: "/submit",
+            type: "POST",
+            data: fd,
+            success: function (response, status, xhr) {
+                console.log('上传成功');
+            }
+        });
+    }
     render() {
         return (
             <div >
@@ -93,6 +106,7 @@ export default class name extends React.Component {
                     showUploadList={true}
                     multiple={true}
                 ><Button>上传</Button><img src={this.state.imgUrl} /></Upload>
+                <Button onClick={this.submit}>提交</Button>
             </div>
         )
     }
