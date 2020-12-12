@@ -19,6 +19,8 @@ const getCc = require('./applyMiddleware/getCc.js') //cc视频中间键
 const debug = require('./applyMiddleware/debug.js') //cc视频中间键
 const util = require('./util')
 const https = require('https')
+const ossConfig = require('./config/oss.config')
+const pbuMinio = require('./applyMiddleware/upload')
 // const pbu_wx_sdk = require('pbu-wx-sdk') //wx sdk中间键
 var router = express.Router()
 
@@ -62,6 +64,9 @@ app.use(getCc.getCc)
 // debug日志处理
 app.use(debug)
 
+
+app.use(pbuMinio(ossConfig))
+
 //使用express-http-proxy代理所有的post请求 只是转发请求
 app.use('/demo', (req, resp, next) => {
     https.get('https://www.baidu.com', function (res) {
@@ -92,6 +97,8 @@ app.get('/template', (req, res, next) => {
 
 })
 
+
+
 //cheerio 操作dom
 app.get('/cheerio', (req, res, next) => {
     let user = new Date().toLocaleTimeString()
@@ -108,7 +115,12 @@ app.get('/cheerio', (req, res, next) => {
     })
     next()
 })
-
+app.get('*',(req,res,next)=>{
+    res.set({
+        'Access-Control-Allow-Origin': '*'
+    })
+    next()
+})
 //读取静态资源
 app.use(express.static('dist'))
 

@@ -4,6 +4,7 @@
 import React from "react";
 import $ from 'jquery'
 import { Upload, Button } from 'antd'
+import UploadComponent from '../components/minio'
 export default class name extends React.Component {
     state={
         imgUrl:''//上传返回的图片
@@ -107,6 +108,9 @@ export default class name extends React.Component {
                     multiple={true}
                 ><Button>上传</Button><img src={this.state.imgUrl} /></Upload>
                 <Button onClick={this.submit}>提交</Button>
+                <UploadComponent>
+                        上传
+                </UploadComponent>
             </div>
         )
     }

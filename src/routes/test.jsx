@@ -8,7 +8,9 @@ import querystring from 'querystring';
 import moment from 'moment'
 import { setTimeout } from 'timers';
 import Copy from '../components/Copy'
-
+import { Sparklines,SparklinesLine } from 'react-sparklines';
+import TextLoop from "react-text-loop";
+import ImgCrop from 'antd-img-crop';
 // locale data
 const locales = {
     "en-US": require('./locales/en-US.js'),
@@ -164,6 +166,17 @@ export default class Test extends React.Component {
                 <Button onClick={this.refresh}>刷新key</Button>
                 <p id='t_p' key={this.state.tp_key}>测试</p>
                 <button id='state'>测试setState</button>
+                {/* <Sparklines data={[5, 10, 5, 20, 8, 15]} limit={5} width={100} height={20} margin={5}>
+                <SparklinesLine color="blue" />
+</Sparklines>
+<TextLoop>
+                    <div>First item</div>
+                    <div>second item</div>
+                    <div>third item</div>
+                </TextLoop> */}
+                <ImgCrop>
+                <img src={require('../assets/lOGO@2x.jpeg')}/>
+  </ImgCrop>
             </div>
         </div>
     }

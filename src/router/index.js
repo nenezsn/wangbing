@@ -22,6 +22,7 @@ const RouterConfig = function () {
           <Route path="/Cc" exact component={require('@routes/cc')} />
           <Route path="/table" exact component={require('@routes/table')} />
           <Route path="/html" exact component={require('@routes/htmltoCanvas')} />
+          <Route path="/cloud" exact component={require('@routes/cloud')} />
         </App>
       </LocaleProvider>
     </Router>
