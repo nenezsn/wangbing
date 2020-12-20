@@ -21,6 +21,8 @@ const util = require('./util')
 const https = require('https')
 const ossConfig = require('./config/oss.config')
 const pbuMinio = require('./applyMiddleware/upload')
+const formidable = require('express-formidable') //用于文件上传
+
 // const pbu_wx_sdk = require('pbu-wx-sdk') //wx sdk中间键
 var router = express.Router()
 
@@ -29,6 +31,12 @@ const app = express()
 var upload = multer({
     dest: 'upload/'
 })
+// app.use(formidable({
+//     encoding: 'utf-8',
+//     uploadDir:'./dest',
+//     multiples: true
+//   }))
+  
 var updateHtml = multer({dest:'dist/'})
 app.use(router)
 router.get('/user/:id', function (req, res, next) {
@@ -142,6 +150,18 @@ app.post('/upload', upload.single('img'), (req, res, next) => {
         })
     })
 })
+// formidable 等同于multer 
+// app.post('/upload',(req,res,next)=>{
+//     console.log('req',req.files.file)
+//     const file = req.files.file
+//     console.log('file',file)
+//     // fs.readFile(file.path,function(error,buffer){
+//     //   fs.writeFile('./dest/test.jpg',buffer);
+//     //   });
+//     res.json({code:200})
+// })
+  
+
 app.post('/updateHtml',updateHtml.single('html'),(req,res,next)=>{
     fs.rename('./dist/' + req.file.filename,'./dist/' + req.file.originalname,function(err){
       if(err){
